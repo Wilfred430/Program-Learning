@@ -13,7 +13,7 @@ vector<int> generateFibonacci(int size)
     {
         fib.push_back(fib[fib.size() - 1] + fib[fib.size() - 2]); // 新增下一個費氏數
     }
-    return fib; // 返回生成的費氏數列
+    return fib; // 返回生成的費氏數列....
 }
 
 // 費氏搜尋函數
