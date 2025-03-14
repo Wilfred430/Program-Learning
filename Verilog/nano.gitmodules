@@ -1,0 +1,3 @@
+[submodule "Verilog"]
+    path = Verilog
+    url = https://github.com/Wilfred430/verilog-repo.git

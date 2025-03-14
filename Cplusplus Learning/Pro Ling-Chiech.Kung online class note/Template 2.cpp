@@ -12,6 +12,6 @@ int main()
     Print("ast",2899);
     Print(4848.585484,2899);
     Print(true,'X');
-
+    
     return 0;
 }
