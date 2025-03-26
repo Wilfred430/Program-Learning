@@ -36,7 +36,6 @@ begin
         state <= IDLE;
     end
     else begin
-        // 輸入處理
         if (in_valid && slot_num < 3) begin
             state <= IDLE; 
             input_num <= input_num + 1;
@@ -69,7 +68,6 @@ begin
         begin
             input_num <= input_num + 1;
         end
-        // 重置
         else if (refresh) begin
             out_valid <= 0;
             out_data <= 5'b0;
@@ -86,12 +84,11 @@ begin
             refresh <= 0;
             state <= IDLE;
         end
-        // 狀態機
         else begin
             case (state)
                 IDLE: begin
                     if (slot_num == 3 && input_num >= 7) begin
-                        access <= 1; // 提前設置 access
+                        access <= 1; 
                         out_valid <= 1;
                         out_data <= array_B[0];
                         state <= CASE1;
@@ -119,15 +116,13 @@ begin
 end
 
 always_comb begin
-    // 預設值
+
     GCD = 1;
 
     if (access) begin
-        // 臨時變數，用於記錄每個除數的最大整除次數
         logic [3:0] count_2, count_3, count_5, count_7, count_11, count_13;
         logic [4:0] temp_B0, temp_B1, temp_B2;
 
-        // 初始化
         count_2 = 0;
         count_3 = 0;
         count_5 = 0;
@@ -135,7 +130,6 @@ always_comb begin
         count_11 = 0;
         count_13 = 0;
 
-        // 計算除數 2 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -161,7 +155,6 @@ always_comb begin
             end
         end
 
-        // 計算除數 3 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -175,7 +168,6 @@ always_comb begin
             end
         end
 
-        // 計算除數 5 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -183,7 +175,6 @@ always_comb begin
             count_5 = count_5 + 1;
         end
 
-        // 計算除數 7 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -191,7 +182,6 @@ always_comb begin
             count_7 = count_7 + 1;
         end
 
-        // 計算除數 11 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -199,7 +189,6 @@ always_comb begin
             count_11 = count_11 + 1;
         end
 
-        // 計算除數 13 的最大整除次數
         temp_B0 = array_B[0];
         temp_B1 = array_B[1];
         temp_B2 = array_B[2];
@@ -207,7 +196,6 @@ always_comb begin
             count_13 = count_13 + 1;
         end
 
-        // 計算 GCD
         GCD = 1;
         if (count_2 == 1) GCD = GCD * 2;
         else if (count_2 == 2) GCD = GCD * 4;
