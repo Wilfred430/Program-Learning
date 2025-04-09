@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "github.copilot-chat",
-        "mshr-h.veriloghdl"
+        "mshr-h.veriloghdl",
+        "ms-toolsai.jupyter-renderers"
     ]
 }
